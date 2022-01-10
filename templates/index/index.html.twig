@@ -3,12 +3,24 @@
 {% block title %}Конвертер фотографий{% endblock %}
 
 {% block body %}
-  <div class="wrapper">
-   <h1>Пузырьковая сортировка</h1>
-   <div>
-   {% for item in array %}
-        {{ item }}
-   {% endfor %}
-   </div>
-</div>
+    <div class="wrapper">
+       <h1>Пузырьковая сортировка</h1>
+       <div>
+           {% for item in array %}
+                {{ item }}
+           {% endfor %}
+       </div>
+       <h1>Пузырьковая сортировка2</h1>
+       <div>
+           {% for item in arr %}
+                {{ item }}
+           {% endfor %}
+       </div>
+       <h1>Сортировка перемешиванием</h1>
+       <div>
+           {% for item in arraySheyk %}
+                {{ item }}
+           {% endfor %}
+       </div>
+    </div>
 {% endblock %}
