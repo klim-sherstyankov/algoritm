@@ -6,9 +6,15 @@
     <div class="wrapper">
        <h1>Пузырьковая сортировка</h1>
        <div>
-           {% for item in array %}
-                {{ item }}
+           {% for array in bubbleArray %}
+                {{ array }}
            {% endfor %}
+       </div>
+       <div>
+           Затраты памяти - {{ bubbleMemory }} байт
+       </div>
+       <div>
+           Затраты времени - {{ bubbleTime }} микросекунд
        </div>
        <h1>Пузырьковая сортировка2</h1>
        <div>

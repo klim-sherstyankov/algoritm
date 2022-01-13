@@ -16,16 +16,8 @@ class IndexController extends AbstractController
     public function index(Request $request)
     {
         $array = [11, 2, 3, 4, 9, 1, 8, 66, 55, 22, 4];
+        $bubble = $this->bubble($array);
 
-        for ($i = 0; $i < count($array) - 1; $i++) {
-            for ($j = 0; $j < count($array) - 1; $j++) {
-                if ($array[$j] > $array[$j + 1]) {
-                    $newItem       = $array[$j + 1];
-                    $array[$j + 1] = $array[$j];
-                    $array[$j]     = $newItem;
-                }
-            }
-        }
         $array2 = [11, 2, 3, 4, 9, 1, 8, 66, 55, 22, 4];
 
         $t = true;
@@ -64,10 +56,31 @@ class IndexController extends AbstractController
         }
 
         return $this->render('index/index.html.twig', [
-            'array' => $array,
+            'bubbleTime' => $bubble['time'],
+            'bubbleMemory' => $bubble['memory'],
+            'bubbleArray' => $bubble['array'],
             'array2' => $array2,
             'arraySheyk' => $arraySheyk,
             'path'  => $request->getRequestUri(),
         ]);
+    }
+
+    public function bubble(array $array)
+    {
+        $startScript = microtime(true);
+
+        for ($i = 0; $i < count($array) - 1; $i++) {
+            for ($j = 0; $j < count($array) - 1; $j++) {
+                if ($array[$j] > $array[$j + 1]) {
+                    $newItem       = $array[$j + 1];
+                    $array[$j + 1] = $array[$j];
+                    $array[$j]     = $newItem;
+                }
+            }
+        }
+        $time = microtime(true) - $startScript;
+        $memory = memory_get_peak_usage();
+
+        return ['time' => $time, 'memory' => $memory, 'array' => $array];
     }
 }
