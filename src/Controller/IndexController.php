@@ -17,18 +17,16 @@ class IndexController extends AbstractController
     {
         $array = [11, 2, 3, 4, 9, 1, 8, 66, 55, 22, 4];
         $bubble = $this->bubble($array);
-
         $array2 = [11, 2, 3, 4, 9, 1, 8, 66, 55, 22, 4];
-
-        $t = true;
+        $stop = true;
         while ($t) {
-            $t = false;
+            $stop = false;
             for ($i = 0; $i < count($array2) - 1; $i++) {
                 if ($array2[$i] > $array2[$i + 1]) {
                     $temp = $array2[$i + 1];
                     $array2[$i + 1] = $array2[$i];
                     $array2[$i] = $temp;
-                    $t = true;
+                    $stop = true;
                 }
             }
         }
