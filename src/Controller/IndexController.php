@@ -19,7 +19,7 @@ class IndexController extends AbstractController
         $bubble = $this->bubble($array);
         $array2 = [11, 2, 3, 4, 9, 1, 8, 66, 55, 22, 4];
         $stop = true;
-        while ($t) {
+        while ($stop) {
             $stop = false;
             for ($i = 0; $i < count($array2) - 1; $i++) {
                 if ($array2[$i] > $array2[$i + 1]) {
