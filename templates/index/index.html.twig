@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Конвертер фотографий{% endblock %}
+{% block title %}сортировка{% endblock %}
 
 {% block body %}
     <div class="wrapper">
@@ -16,17 +16,29 @@
        <div>
            Затраты времени - {{ bubbleTime }} микросекунд
        </div>
-       <h1>Пузырьковая сортировка2</h1>
+       <h1>Пузырьковая сортировка - второй вариант</h1>
        <div>
-           {% for item in array2 %}
-                {{ item }}
+           {% for array in bubbleSecondArray %}
+                {{ array }}
            {% endfor %}
+       </div>
+       <div>
+           Затраты памяти - {{ bubbleSecondMemory }} байт
+       </div>
+       <div>
+           Затраты времени - {{ bubbleSecondTime }} микросекунд
        </div>
        <h1>Сортировка перемешиванием</h1>
        <div>
-           {% for item in arraySheyk %}
+           {% for item in sheykArray %}
                 {{ item }}
            {% endfor %}
+       </div>
+       <div>
+           Затраты памяти - {{ sheykMemory }} байт
+       </div>
+       <div>
+           Затраты времени - {{ sheykTime }} микросекунд
        </div>
     </div>
 {% endblock %}
