@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\LengthType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,27 +16,50 @@ class IndexController extends AbstractController
      */
     public function index(Request $request)
     {
-        $array  = [11, 2, 3, 4, 9, 1, 8, 66, 55, 22, 4];
-        $bubble = $this->bubble($array);
+        $form = $this->createForm(LengthType::class, null, ['csrf_protection' => false]);
 
-        $array2       = [11, 2, 3, 4, 9, 1, 8, 66, 55, 22, 4];
-        $bubbleSecond = $this->bubbleSecond($array);
+        $form->handleRequest($request);
 
-        $arraySheyk   = [11, 2, 3, 4, 9, 1, 8, 66, 55, 22, 4];
-        $bubbleSecond = $this->sheyk($array);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // dump($form->getData()['length']);die;
+            $length = $form->getData()['length'];
+
+            $array  = $this->generate($length);
+            $bubble = $this->bubble($array);
+
+            $array2       = $this->generate($length);
+            $bubbleSecond = $this->bubbleSecond($array);
+
+            $arraySheyk   = $this->generate($length);
+            $bubbleSecond = $this->sheyk($array);
+
+            return $this->render('index/index.html.twig', [
+                'bubbleTime'         => $bubble['time'],
+                'bubbleMemory'       => $bubble['memory'],
+                'bubbleArray'        => $bubble['array'],
+                'bubbleSecondTime'   => $bubbleSecond['time'],
+                'bubbleSecondMemory' => $bubbleSecond['memory'],
+                'bubbleSecondArray'  => $bubbleSecond['array'],
+                'sheykTime'          => $bubbleSecond['time'],
+                'sheykMemory'        => $bubbleSecond['memory'],
+                'sheykArray'         => $bubbleSecond['array'],
+                'path'               => $request->getRequestUri(),
+            ]);
+        }
 
         return $this->render('index/index.html.twig', [
-            'bubbleTime'         => $bubble['time'],
-            'bubbleMemory'       => $bubble['memory'],
-            'bubbleArray'        => $bubble['array'],
-            'bubbleSecondTime'   => $bubbleSecond['time'],
-            'bubbleSecondMemory' => $bubbleSecond['memory'],
-            'bubbleSecondArray'  => $bubbleSecond['array'],
-            'sheykTime'          => $bubbleSecond['time'],
-            'sheykMemory'        => $bubbleSecond['memory'],
-            'sheykArray'         => $bubbleSecond['array'],
-            'path'               => $request->getRequestUri(),
+            'form' => $form->createView(),
+            'path' => $request->getRequestUri(),
         ]);
+    }
+
+    public function generate(int $length)
+    {
+        for ($i = 0; $i < $length; $i++) {
+            $array[] = rand(0, 600);
+        }
+
+        return $array;
     }
 
     public function bubble(array $array)

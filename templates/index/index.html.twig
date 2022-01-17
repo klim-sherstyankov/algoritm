@@ -4,41 +4,47 @@
 
 {% block body %}
     <div class="wrapper">
-       <h1>Пузырьковая сортировка</h1>
-       <div>
-           {% for array in bubbleArray %}
-                {{ array }}
-           {% endfor %}
-       </div>
-       <div>
-           Затраты памяти - {{ bubbleMemory }} байт
-       </div>
-       <div>
-           Затраты времени - {{ bubbleTime }} микросекунд
-       </div>
-       <h1>Пузырьковая сортировка - второй вариант</h1>
-       <div>
-           {% for array in bubbleSecondArray %}
-                {{ array }}
-           {% endfor %}
-       </div>
-       <div>
-           Затраты памяти - {{ bubbleSecondMemory }} байт
-       </div>
-       <div>
-           Затраты времени - {{ bubbleSecondTime }} микросекунд
-       </div>
-       <h1>Сортировка перемешиванием</h1>
-       <div>
-           {% for item in sheykArray %}
-                {{ item }}
-           {% endfor %}
-       </div>
-       <div>
-           Затраты памяти - {{ sheykMemory }} байт
-       </div>
-       <div>
-           Затраты времени - {{ sheykTime }} микросекунд
-       </div>
+        {% if form is not defined %}
+           <h1>Пузырьковая сортировка</h1>
+           <div class="arraySort">
+               {% for array in bubbleArray %}
+                    {{ array }}
+               {% endfor %}
+           </div>
+           <div>
+               Затраты памяти - {{ bubbleMemory }} байт
+           </div>
+           <div>
+               Затраты времени - {{ bubbleTime }} микросекунд
+           </div>
+           <h1>Пузырьковая сортировка - второй вариант</h1>
+           <div class="arraySort">
+               {% for array in bubbleSecondArray %}
+                    {{ array }}
+               {% endfor %}
+           </div>
+           <div>
+               Затраты памяти - {{ bubbleSecondMemory }} байт
+           </div>
+           <div>
+               Затраты времени - {{ bubbleSecondTime }} микросекунд
+           </div>
+           <h1>Сортировка перемешиванием</h1>
+           <div class="arraySort">
+               {% for item in sheykArray %}
+                    {{ item }}
+               {% endfor %}
+           </div>
+           <div>
+               Затраты памяти - {{ sheykMemory }} байт
+           </div>
+           <div>
+               Затраты времени - {{ sheykTime }} микросекунд
+           </div>
+        {% else %}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        {% endif %}
     </div>
 {% endblock %}
