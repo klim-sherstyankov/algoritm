@@ -18,6 +18,7 @@ class LengthType extends AbstractType
             ->add('length', TextType::class, [
                 'label'    => 'Длина массива',
                 'required' => true,
+                'attr' => ['maxlength' => 4],
             ])
             ->add('send', SubmitType::class,[
                 'label'    => 'Установить',
