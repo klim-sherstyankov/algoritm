@@ -21,7 +21,6 @@ class IndexController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // dump($form->getData()['length']);die;
             $length = $form->getData()['length'];
 
             $array  = $this->generate($length);

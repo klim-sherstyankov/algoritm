@@ -1,19 +1,24 @@
-.wrapper,.navbar{
+.wrapper,
+.navbar {
   max-width: 112rem;
   margin-left: auto;
   margin-right: auto;
   padding: 0 1rem;
 }
-.form-extension label{
+
+.form-extension label {
   margin-right: .4rem;
 }
-.form-range label{
+
+.form-range label {
   margin-right: .4rem;
 }
-.form-extension select{
+
+.form-extension select {
   padding: .2rem;
 }
-.form-name{
+
+.form-name {
   position: relative;
   width: 25rem;
   margin: 1rem;
@@ -21,38 +26,30 @@
   display: block;
   height: 3rem;
 }
-.form-name input{
+
+.form-name input {
   display: none;
 }
-/* .base-container{
-  margin: 1rem;
-} */
-.custom-file-label::after{
-  content: "Файл"!important;
+
+.custom-file-label::after {
+  content: "Файл" !important;
 }
+
 .tab-1,
 .tab-2,
 #tab-1,
 #tab-2 {
   display: none;
 }
-#tab-1:checked~.tab-1{
+
+#tab-1:checked~.tab-1 {
   display: block;
 }
-#tab-2:checked~.tab-2{
+
+#tab-2:checked~.tab-2 {
   display: block;
 }
-/* #tab-1:checked~.tab-1 {
-  margin-top: 2rem;
-  display: flex;
-}
- */
-/* #tab-1:checked~.tab-1 .tab-1-file {
-  display: none;
-}
-#tab-2:checked~.tab-1 .tab-1-text {
-  display: none;
-} */
+
 
 #tab-1:checked+label {
   background: #4A4F53;
@@ -61,12 +58,14 @@
 #tab-2:checked+label {
   background: #4A4F53;
 }
-.tab-1-text div{
+
+.tab-1-text div {
   display: flex;
   flex-direction: column;
   width: 30%;
   margin: 15px 0;
 }
+
 .result-hash {
   margin: 10px 10px 10px 0;
   border: 1px solid #a5a5a5;
@@ -74,6 +73,7 @@
   padding: 10px;
   color: var(--bs-red);
 }
-.arraySort{
+
+.arraySort {
   font-size: 8px;
 }
