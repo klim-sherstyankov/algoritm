@@ -16,7 +16,7 @@ class LengthType extends AbstractType
     ) {
         $builder
             ->add('length', TextType::class, [
-                'label'    => 'Длина массива',
+                'label'    => 'Установить длину массива',
                 'required' => true,
                 'attr'     => ['maxlength' => 4],
             ])
