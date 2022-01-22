@@ -24,12 +24,9 @@ class IndexController extends AbstractController
             $length = $form->getData()['length'];
 
             $array  = $this->generate($length);
+
             $bubble = $this->bubble($array);
-
-            $array2       = $this->generate($length);
             $bubbleSecond = $this->bubbleSecond($array);
-
-            $arraySheyk   = $this->generate($length);
             $bubbleSecond = $this->sheyk($array);
 
             return $this->render('index/index.html.twig', [
