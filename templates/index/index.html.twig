@@ -17,6 +17,7 @@
            <div>
                Затраты времени - {{ bubbleTime }} микросекунд
            </div>
+           {# сортировка пузырьком 2 способ #}
            <h1>Пузырьковая сортировка - второй вариант</h1>
            <div class="arraySort">
                {% for array in bubbleSecondArray %}
@@ -29,6 +30,8 @@
            <div>
                Затраты времени - {{ bubbleSecondTime }} микросекунд
            </div>
+
+           {# Сортировка перемешиванием #}
            <h1>Сортировка перемешиванием</h1>
            <div class="arraySort">
                {% for item in sheykArray %}
@@ -40,6 +43,20 @@
            </div>
            <div>
                Затраты времени - {{ sheykTime }} микросекунд
+           </div>
+
+           {# Сортировка вставкой #}
+           <h1>Сортировка вставкой</h1>
+           <div class="arraySort">
+               {% for item in insertArray %}
+                    {{ item }}
+               {% endfor %}
+           </div>
+           <div>
+               Затраты памяти - {{ insertMemory }} байт
+           </div>
+           <div>
+               Затраты времени - {{ insertTime }} микросекунд
            </div>
         {% else %}
             {{ form_start(form) }}

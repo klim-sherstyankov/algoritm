@@ -23,11 +23,14 @@ class IndexController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $length = $form->getData()['length'];
 
-            $array  = $this->generate($length);
+            $array = $this->generate($length);
 
-            $bubble = $this->bubble($array);
+            $bubble       = $this->bubble($array);
             $bubbleSecond = $this->bubbleSecond($array);
-            $bubbleSecond = $this->sheyk($array);
+            $sheyk        = $this->sheyk($array);
+            $insert       = $this->insertSort($array);
+
+            // dump($insert);exit;
 
             return $this->render('index/index.html.twig', [
                 'bubbleTime'         => $bubble['time'],
@@ -36,9 +39,12 @@ class IndexController extends AbstractController
                 'bubbleSecondTime'   => $bubbleSecond['time'],
                 'bubbleSecondMemory' => $bubbleSecond['memory'],
                 'bubbleSecondArray'  => $bubbleSecond['array'],
-                'sheykTime'          => $bubbleSecond['time'],
-                'sheykMemory'        => $bubbleSecond['memory'],
-                'sheykArray'         => $bubbleSecond['array'],
+                'sheykTime'          => $sheyk['time'],
+                'sheykMemory'        => $sheyk['memory'],
+                'sheykArray'         => $sheyk['array'],
+                'insertTime'         => $insert['time'],
+                'insertMemory'       => $insert['memory'],
+                'insertArray'        => $insert['array'],
                 'path'               => $request->getRequestUri(),
             ]);
         }
@@ -125,6 +131,30 @@ class IndexController extends AbstractController
             ++$left;
         }
 
+        $time   = microtime(true) - $startScript;
+        $memory = memory_get_peak_usage();
+
+        return ['time' => $time, 'memory' => $memory, 'array' => $array];
+    }
+
+    public function insertSort(array $array)
+    {
+        $startScript = microtime(true);
+
+        for ($i = 0; $i <= count($array) - 1; $i++) {
+            if (0 == $i && $array[$i + 1] > $array[$i]) {
+                $newItem       = $array[$i];
+                $array[$i]     = $array[$i + 1];
+                $array[$i + 1] = $newItem;
+            }
+            for ($j = $i; $j > 0; $j--) {
+                if ($array[$j - 1] > $array[$j]) {
+                    $newItem       = $array[$j - 1];
+                    $array[$j - 1] = $array[$j];
+                    $array[$j]     = $newItem;
+                }
+            }
+        }
         $time   = microtime(true) - $startScript;
         $memory = memory_get_peak_usage();
 
