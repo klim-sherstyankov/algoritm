@@ -58,6 +58,20 @@
            <div>
                Затраты времени - {{ insertTime }} микросекунд
            </div>
+
+           {# Сортировка выбором #}
+           <h1>Сортировка выбором</h1>
+           <div class="arraySort">
+               {% for item in choiceArray %}
+                    {{ item }}
+               {% endfor %}
+           </div>
+           <div>
+               Затраты памяти - {{ choiceMemory }} байт
+           </div>
+           <div>
+               Затраты времени - {{ choiceTime }} микросекунд
+           </div>
         {% else %}
             {{ form_start(form) }}
             {{ form_widget(form) }}

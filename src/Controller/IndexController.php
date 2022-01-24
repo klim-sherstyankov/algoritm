@@ -29,6 +29,7 @@ class IndexController extends AbstractController
             $bubbleSecond = $this->bubbleSecond($array);
             $sheyk        = $this->sheyk($array);
             $insert       = $this->insertSort($array);
+            $choice       = $this->choiceSort($array);
 
             // dump($insert);exit;
 
@@ -45,6 +46,9 @@ class IndexController extends AbstractController
                 'insertTime'         => $insert['time'],
                 'insertMemory'       => $insert['memory'],
                 'insertArray'        => $insert['array'],
+                'choiceTime'         => $choice['time'],
+                'choiceMemory'       => $choice['memory'],
+                'choiceArray'        => $choice['array'],
                 'path'               => $request->getRequestUri(),
             ]);
         }
@@ -153,6 +157,30 @@ class IndexController extends AbstractController
                     $array[$j - 1] = $array[$j];
                     $array[$j]     = $newItem;
                 }
+            }
+        }
+        $time   = microtime(true) - $startScript;
+        $memory = memory_get_peak_usage();
+
+        return ['time' => $time, 'memory' => $memory, 'array' => $array];
+    }
+
+    public function choiceSort(array $array)
+    {
+        $startScript = microtime(true);
+
+        for ($i = 0; $i <= count($array) - 1; $i++) {
+            $min = $array[$i];
+            for ($j = $i; $j <= count($array) - 1; $j++) {
+                if($min > $array[$j]) {
+                    $min = $array[$j];
+                    $index = $j;
+                }
+            }
+            if ($array[$i] > $min) {
+                $newItem       = $array[$i];
+                $array[$i]     = $min;
+                $array[$index] = $newItem;
             }
         }
         $time   = microtime(true) - $startScript;
