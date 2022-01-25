@@ -30,6 +30,7 @@ class IndexController extends AbstractController
             $sheyk        = $this->sheyk($array);
             $insert       = $this->insertSort($array);
             $choice       = $this->choiceSort($array);
+            $comb         = $this->combSort($array);
 
             // dump($insert);exit;
 
@@ -49,6 +50,9 @@ class IndexController extends AbstractController
                 'choiceTime'         => $choice['time'],
                 'choiceMemory'       => $choice['memory'],
                 'choiceArray'        => $choice['array'],
+                'combTime'           => $comb['time'],
+                'combMemory'         => $comb['memory'],
+                'combArray'          => $comb['array'],
                 'path'               => $request->getRequestUri(),
             ]);
         }
@@ -172,8 +176,8 @@ class IndexController extends AbstractController
         for ($i = 0; $i <= count($array) - 1; $i++) {
             $min = $array[$i];
             for ($j = $i; $j <= count($array) - 1; $j++) {
-                if($min > $array[$j]) {
-                    $min = $array[$j];
+                if ($min > $array[$j]) {
+                    $min   = $array[$j];
                     $index = $j;
                 }
             }
@@ -181,6 +185,32 @@ class IndexController extends AbstractController
                 $newItem       = $array[$i];
                 $array[$i]     = $min;
                 $array[$index] = $newItem;
+            }
+        }
+        $time   = microtime(true) - $startScript;
+        $memory = memory_get_peak_usage();
+
+        return ['time' => $time, 'memory' => $memory, 'array' => $array];
+    }
+
+    public function combSort(array $array)
+    {
+        $startScript = microtime(true);
+
+        $count = count($array);
+        $swap  = false;
+        while ($count > 11 || !$swap) {
+            if ($count > 1) {
+                $count /= 1.27;
+            }
+            $swap = true;
+            $i    = 0;
+            while ($i + $count < count($array)) {
+                if ($array[$i] > $array[$i + $count]) {
+                    list($array[$i], $array[$i + $count]) = [$array[$i + $count], $array[$i]];
+                    $swap                                 = false;
+                }
+                ++$i;
             }
         }
         $time   = microtime(true) - $startScript;

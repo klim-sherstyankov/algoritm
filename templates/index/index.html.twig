@@ -72,6 +72,20 @@
            <div>
                Затраты времени - {{ choiceTime }} микросекунд
            </div>
+
+           {# Сортировка расческой #}
+           <h1>Сортировка расческой</h1>
+           <div class="arraySort">
+               {% for item in combArray %}
+                    {{ item }}
+               {% endfor %}
+           </div>
+           <div>
+               Затраты памяти - {{ combMemory }} байт
+           </div>
+           <div>
+               Затраты времени - {{ combTime }} микросекунд
+           </div>
         {% else %}
             {{ form_start(form) }}
             {{ form_widget(form) }}
