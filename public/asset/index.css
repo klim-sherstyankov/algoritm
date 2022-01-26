@@ -77,3 +77,11 @@
 .arraySort {
   font-size: 8px;
 }
+
+.form-cont {
+  width: fit-content;
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin: auto;
+}

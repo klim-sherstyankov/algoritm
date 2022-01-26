@@ -17,7 +17,6 @@ class IndexController extends AbstractController
     public function index(Request $request)
     {
         $form = $this->createForm(LengthType::class, null, ['csrf_protection' => false]);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -32,28 +31,14 @@ class IndexController extends AbstractController
             $choice       = $this->choiceSort($array);
             $comb         = $this->combSort($array);
 
-            // dump($insert);exit;
-
             return $this->render('index/index.html.twig', [
-                'bubbleTime'         => $bubble['time'],
-                'bubbleMemory'       => $bubble['memory'],
-                'bubbleArray'        => $bubble['array'],
-                'bubbleSecondTime'   => $bubbleSecond['time'],
-                'bubbleSecondMemory' => $bubbleSecond['memory'],
-                'bubbleSecondArray'  => $bubbleSecond['array'],
-                'sheykTime'          => $sheyk['time'],
-                'sheykMemory'        => $sheyk['memory'],
-                'sheykArray'         => $sheyk['array'],
-                'insertTime'         => $insert['time'],
-                'insertMemory'       => $insert['memory'],
-                'insertArray'        => $insert['array'],
-                'choiceTime'         => $choice['time'],
-                'choiceMemory'       => $choice['memory'],
-                'choiceArray'        => $choice['array'],
-                'combTime'           => $comb['time'],
-                'combMemory'         => $comb['memory'],
-                'combArray'          => $comb['array'],
-                'path'               => $request->getRequestUri(),
+                'bubble'       => $bubble,
+                'bubbleSecond' => $bubbleSecond,
+                'sheyk'        => $sheyk,
+                'insert'       => $insert,
+                'choice'       => $choice,
+                'comb'         => $comb,
+                'path'         => $request->getRequestUri(),
             ]);
         }
 
@@ -74,7 +59,8 @@ class IndexController extends AbstractController
 
     public function bubble(array $array)
     {
-        $startScript = microtime(true);
+        $startScript  = microtime(true);
+        $memory_start = memory_get_usage();
 
         for ($i = 0; $i < count($array) - 1; $i++) {
             for ($j = 0; $j < count($array) - 1; $j++) {
@@ -86,14 +72,15 @@ class IndexController extends AbstractController
             }
         }
         $time   = microtime(true) - $startScript;
-        $memory = memory_get_peak_usage();
+        $memory = memory_get_usage() - $memory_start;
 
         return ['time' => $time, 'memory' => $memory, 'array' => $array];
     }
 
     public function bubbleSecond(array $array)
     {
-        $startScript = microtime(true);
+        $startScript  = microtime(true);
+        $memory_start = memory_get_usage();
 
         $stop = true;
         while ($stop) {
@@ -109,14 +96,15 @@ class IndexController extends AbstractController
         }
 
         $time   = microtime(true) - $startScript;
-        $memory = memory_get_peak_usage();
+        $memory = memory_get_usage() - $memory_start;
 
         return ['time' => $time, 'memory' => $memory, 'array' => $array];
     }
 
     public function sheyk(array $array)
     {
-        $startScript = microtime(true);
+        $startScript  = microtime(true);
+        $memory_start = memory_get_usage();
 
         $left  = 0;
         $right = count($array) - 1;
@@ -140,14 +128,15 @@ class IndexController extends AbstractController
         }
 
         $time   = microtime(true) - $startScript;
-        $memory = memory_get_peak_usage();
+        $memory = memory_get_usage() - $memory_start;
 
         return ['time' => $time, 'memory' => $memory, 'array' => $array];
     }
 
     public function insertSort(array $array)
     {
-        $startScript = microtime(true);
+        $startScript  = microtime(true);
+        $memory_start = memory_get_usage();
 
         for ($i = 0; $i <= count($array) - 1; $i++) {
             if (0 == $i && $array[$i + 1] > $array[$i]) {
@@ -164,14 +153,15 @@ class IndexController extends AbstractController
             }
         }
         $time   = microtime(true) - $startScript;
-        $memory = memory_get_peak_usage();
+        $memory = memory_get_usage() - $memory_start;
 
         return ['time' => $time, 'memory' => $memory, 'array' => $array];
     }
 
     public function choiceSort(array $array)
     {
-        $startScript = microtime(true);
+        $startScript  = microtime(true);
+        $memory_start = memory_get_usage();
 
         for ($i = 0; $i <= count($array) - 1; $i++) {
             $min = $array[$i];
@@ -188,14 +178,15 @@ class IndexController extends AbstractController
             }
         }
         $time   = microtime(true) - $startScript;
-        $memory = memory_get_peak_usage();
+        $memory = memory_get_usage() - $memory_start;
 
         return ['time' => $time, 'memory' => $memory, 'array' => $array];
     }
 
     public function combSort(array $array)
     {
-        $startScript = microtime(true);
+        $startScript  = microtime(true);
+        $memory_start = memory_get_usage();
 
         $count = count($array);
         $swap  = false;
@@ -214,7 +205,7 @@ class IndexController extends AbstractController
             }
         }
         $time   = microtime(true) - $startScript;
-        $memory = memory_get_peak_usage();
+        $memory = memory_get_usage() - $memory_start;
 
         return ['time' => $time, 'memory' => $memory, 'array' => $array];
     }
