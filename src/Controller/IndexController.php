@@ -21,23 +21,15 @@ class IndexController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $length = $form->getData()['length'];
-
-            $array = $this->generate($length);
-
-            $bubble       = $this->bubble($array);
-            $bubbleSecond = $this->bubbleSecond($array);
-            $sheyk        = $this->sheyk($array);
-            $insert       = $this->insertSort($array);
-            $choice       = $this->choiceSort($array);
-            $comb         = $this->combSort($array);
+            $array  = $this->generate($length);
 
             return $this->render('index/index.html.twig', [
-                'bubble'       => $bubble,
-                'bubbleSecond' => $bubbleSecond,
-                'sheyk'        => $sheyk,
-                'insert'       => $insert,
-                'choice'       => $choice,
-                'comb'         => $comb,
+                'bubble'       => $this->bubble($array),
+                'bubbleSecond' => $this->bubbleSecond($array),
+                'sheyk'        => $this->sheyk($array),
+                'insert'       => $this->insertSort($array),
+                'choice'       => $this->choiceSort($array),
+                'comb'         => $this->combSort($array),
                 'path'         => $request->getRequestUri(),
             ]);
         }
@@ -61,7 +53,6 @@ class IndexController extends AbstractController
     {
         $startScript  = microtime(true);
         $memory_start = memory_get_usage();
-
         for ($i = 0; $i < count($array) - 1; $i++) {
             for ($j = 0; $j < count($array) - 1; $j++) {
                 if ($array[$j] > $array[$j + 1]) {
@@ -81,8 +72,7 @@ class IndexController extends AbstractController
     {
         $startScript  = microtime(true);
         $memory_start = memory_get_usage();
-
-        $stop = true;
+        $stop         = true;
         while ($stop) {
             $stop = false;
             for ($i = 0; $i < count($array) - 1; $i++) {
@@ -94,7 +84,6 @@ class IndexController extends AbstractController
                 }
             }
         }
-
         $time   = microtime(true) - $startScript;
         $memory = memory_get_usage() - $memory_start;
 
@@ -105,9 +94,8 @@ class IndexController extends AbstractController
     {
         $startScript  = microtime(true);
         $memory_start = memory_get_usage();
-
-        $left  = 0;
-        $right = count($array) - 1;
+        $left         = 0;
+        $right        = count($array) - 1;
         while ($left <= $right) {
             for ($i = $left; $i < $right; ++$i) {
                 if ($array[$i + 1] < $array[$i]) {
@@ -126,7 +114,6 @@ class IndexController extends AbstractController
             }
             ++$left;
         }
-
         $time   = microtime(true) - $startScript;
         $memory = memory_get_usage() - $memory_start;
 
@@ -137,7 +124,6 @@ class IndexController extends AbstractController
     {
         $startScript  = microtime(true);
         $memory_start = memory_get_usage();
-
         for ($i = 0; $i <= count($array) - 1; $i++) {
             if (0 == $i && $array[$i + 1] > $array[$i]) {
                 $newItem       = $array[$i];
@@ -162,7 +148,6 @@ class IndexController extends AbstractController
     {
         $startScript  = microtime(true);
         $memory_start = memory_get_usage();
-
         for ($i = 0; $i <= count($array) - 1; $i++) {
             $min = $array[$i];
             for ($j = $i; $j <= count($array) - 1; $j++) {
@@ -187,9 +172,8 @@ class IndexController extends AbstractController
     {
         $startScript  = microtime(true);
         $memory_start = memory_get_usage();
-
-        $count = count($array);
-        $swap  = false;
+        $count        = count($array);
+        $swap         = false;
         while ($count > 11 || !$swap) {
             if ($count > 1) {
                 $count /= 1.27;
