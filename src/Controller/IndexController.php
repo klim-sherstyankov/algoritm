@@ -25,12 +25,12 @@ class IndexController extends AbstractController
 
             return $this->render('index/index.html.twig', [
                 'bubble'       => $this->bubble($array),
-                'bubbleSecond' => $this->bubbleSecond($array),
                 'sheyk'        => $this->sheyk($array),
                 'insert'       => $this->insertSort($array),
                 'choice'       => $this->choiceSort($array),
                 'comb'         => $this->combSort($array),
                 'path'         => $request->getRequestUri(),
+                'bubbleSecond' => $this->bubbleSecond($array),
             ]);
         }
 
